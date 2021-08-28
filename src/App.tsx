@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy } from 'react';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route, Switch } from 'react-router-dom';
+import RouteEnum from './constants/RouteEnum';
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
+import { BaseTheme } from './MuiConfig';
 
-function App() {
+const HomePage = lazy(() => import('./pages/HomePage'));
+
+export type AppProps = {
+  history: any;
+};
+const App: React.FC<AppProps> = ({ history }: AppProps) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <MuiThemeProvider theme={BaseTheme}>
+        <CssBaseline />
+        <ConnectedRouter history={history}>
+          <Suspense fallback={'...Loading'}>
+            <Switch>
+              <Route exact={true} path={RouteEnum.Home} component={HomePage} />
+            </Switch>
+          </Suspense>
+        </ConnectedRouter>
+      </MuiThemeProvider>
+    </React.Fragment>
   );
-}
-
+};
 export default App;

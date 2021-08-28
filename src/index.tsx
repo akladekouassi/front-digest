@@ -1,17 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import { Provider } from 'react-redux';
+import { Store } from 'redux';
+import { createBrowserHistory } from 'history';
+import { History } from 'history';
+import { rootStore } from './redux/store/index';
+import App, { AppProps } from './App';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+interface AppStoreInitialState {}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+(async () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
+      },
+    },
+  });
+
+  const initialState: AppStoreInitialState = {};
+  const history: History = createBrowserHistory({});
+  const store: Store<any> = rootStore(initialState, history);
+  const rootEl = document.getElementById('root');
+
+  const render = (Component: React.FC<AppProps>, el: HTMLElement | null) => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Component history={history} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </Provider>,
+      el
+    );
+  };
+
+  render(App, rootEl);
+})();

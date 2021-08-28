@@ -1,0 +1,34 @@
+{
+  "recipes": [
+    {
+      "id": "e1a8fec5-76a3-48d1-9bf9-10e69d4b0a82",
+      "recipeName": "Oeuf au plat",
+      "recipeDesription": "Casser oeuf, taper, mettre lhuuile au feu ensuite les oeuf",
+      "preparationTime": "Moin de 10min",
+      "addDate": "2021-08-28T17:05:38.528Z",
+      "ingredient": "poivron"
+    }
+  ],
+  "ingredients": [
+    {
+      "id": "44975e19-2a65-4902-ba5d-ca3eb7e5f2f2",
+      "name": "piment"
+    },
+    {
+      "id": "2c8fa25a-65e2-499a-9a64-9ffb874d9724",
+      "name": "aubergine"
+    },
+    {
+      "id": "225c5515-027d-4f7a-84e7-dffb29fd7a65",
+      "name": "poivron"
+    },
+    {
+      "id": "75739153-c2f7-496c-8dc9-5f7506976155",
+      "name": "paicil"
+    },
+    {
+      "id": "be306660-e988-4e57-b6c5-de5624663ceb",
+      "name": "Gimgimbre"
+    }
+  ]
+}
